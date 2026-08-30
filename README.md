@@ -29,5 +29,5 @@ Satie Kumeda Chirico 22301624
 - JavaScript
 
 ## Como executar localmente
-- **Aplicação no ar (GitHub Pages):** https://sati-e.github.io/bootcamp2-app/
+- **Aplicação no ar (GitHub Pages):** [https://sati-e.github.io/bootcamp2-app/](https://sati-e.github.io/bootcamp2-app/)
 - **Repositório:** https://github.com/sati-e/bootcamp2-app
