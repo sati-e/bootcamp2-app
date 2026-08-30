@@ -1,6 +1,21 @@
+let listaPokemons = [];
+
+async function carregarListaPokemons() {
+  try {
+    const resposta = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000");
+    const dados = await resposta.json();
+    listaPokemons = dados.results.map((p) => p.name);
+  } catch (erro) {
+    console.error("Erro ao carregar lista de pokémons:", erro);
+  }
+}
+
+carregarListaPokemons();
+
 async function buscarDados(termo) {
   const area = document.getElementById("resultado");
 
+  area.classList.remove("fade-in");
   area.innerHTML = "<p>Carregando...</p>";
 
   try {
@@ -40,6 +55,10 @@ async function buscarDados(termo) {
       <p>Tente usar um nome ou número válido.</p>
     `;
   }
+
+  // Força o navegador a "esquecer" o estado anterior da animação
+  void area.offsetWidth;
+  area.classList.add("fade-in");
 }
 
 const campoBusca = document.getElementById("campo-busca");
@@ -59,11 +78,44 @@ function realizarBusca() {
 
   buscarDados(termo);
 }
+const listaSugestoes = document.getElementById("sugestoes");
 
-botaoBuscar.addEventListener("click", realizarBusca);
+function mostrarSugestoes(termo) {
+  listaSugestoes.innerHTML = "";
+  if (!termo) return;
+
+  const correspondencias = listaPokemons
+    .filter((nome) => nome.startsWith(termo))
+    .slice(0, 5);
+
+  correspondencias.forEach((nome) => {
+    const item = document.createElement("li");
+    item.textContent = nome;
+
+    item.addEventListener("click", () => {
+      campoBusca.value = nome;
+      listaSugestoes.innerHTML = "";
+      realizarBusca();
+    });
+
+    listaSugestoes.appendChild(item);
+  });
+}
+
+campoBusca.addEventListener("input", () => {
+  const termo = campoBusca.value.toLowerCase().trim();
+  mostrarSugestoes(termo);
+});
+
+document.addEventListener("click", (evento) => {
+  if (!evento.target.closest(".campo-wrapper")) {
+    listaSugestoes.innerHTML = "";
+  }
+});
 
 campoBusca.addEventListener("keydown", (evento) => {
   if (evento.key === "Enter") {
+    listaSugestoes.innerHTML = ""; // ← linha nova
     realizarBusca();
   }
 });

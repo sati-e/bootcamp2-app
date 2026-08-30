@@ -152,6 +152,21 @@ h1 {
   min-height: 200px;
 }
 
+.fade-in {
+  animation: entrada 0.4s ease forwards;
+}
+
+@keyframes entrada {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 #resultado h2 {
   text-transform: uppercase;
   color: #444;
@@ -169,4 +184,53 @@ h1 {
 #resultado p {
   margin: 8px 0;
   color: #444;
+}
+
+.campo-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.campo-wrapper #campo-busca {
+  width: 100%;
+}
+
+#sugestoes {
+  list-style: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+  overflow: hidden;
+  z-index: 10;
+
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+#sugestoes:empty {
+  display: none;
+  border: none;
+  box-shadow: none;
+}
+
+#sugestoes li {
+  padding: 10px 16px;
+  text-align: left;
+  cursor: pointer;
+  text-transform: capitalize;
+  color: #1e2b25;
+  transition: background-color 0.15s ease;
+}
+
+#sugestoes li:hover,
+#sugestoes li.ativo {
+  background: #f2f4f3;
 }
