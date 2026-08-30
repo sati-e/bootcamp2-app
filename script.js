@@ -21,7 +21,7 @@ async function buscarDados(termo) {
     const imagem = dados.sprites.front_default;
 
     area.innerHTML = `
-      <h2>${dados.name}</h2>
+      <h2 class="uppercase">${dados.name}</h2>
 
       ${
         imagem
@@ -42,23 +42,28 @@ async function buscarDados(termo) {
   }
 }
 
+const campoBusca = document.getElementById("campo-busca");
+const botaoBuscar = document.getElementById("botao-buscar");
 
-document
-  .getElementById("botao-buscar")
-  .addEventListener("click", () => {
+function realizarBusca() {
+  const termo = campoBusca.value
+    .toLowerCase()
+    .trim();
 
-    const campo = document.getElementById("campo-busca");
+  if (!termo) {
+    document.getElementById("resultado").innerHTML =
+      "<p>Digite o nome ou número de um Pokémon.</p>";
 
-    const termo = campo.value
-      .toLowerCase()
-      .trim();
+    return;
+  }
 
-    if (!termo) {
-      document.getElementById("resultado").innerHTML =
-        "<p>Digite o nome ou número de um Pokémon.</p>";
+  buscarDados(termo);
+}
 
-      return;
-    }
+botaoBuscar.addEventListener("click", realizarBusca);
 
-    buscarDados(termo);
-  });
+campoBusca.addEventListener("keydown", (evento) => {
+  if (evento.key === "Enter") {
+    realizarBusca();
+  }
+});
