@@ -84,15 +84,20 @@ async function buscarDados(termo) {
   area.classList.add("fade-in");
 }
 
+// svg do coração, usado no resultado e na lista de favoritos
+const SVG_CORACAO = `
+  <svg viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>
+`;
+
 // monta o coraçãozinho do resultado, cheio se ja for favorito
 function criarBotaoCoracao(favorito) {
   const idFavorito = favorito ? favorito.id : "";
 
   return `
     <button id="botao-favoritar" class="coracao-btn${favorito ? " ativo" : ""}" type="button" data-id="${idFavorito}" aria-label="Favoritar">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
+      ${SVG_CORACAO}
     </button>
   `;
 }
@@ -107,12 +112,7 @@ async function alternarFavorito() {
   if (idAtual) {
     await removerFavorito(idAtual);
   } else {
-    await salvarFavorito(pokemonAtual.nome, {
-      imagem: pokemonAtual.imagem,
-      altura: pokemonAtual.altura,
-      peso: pokemonAtual.peso,
-      tipos: pokemonAtual.tipos,
-    });
+    await salvarFavorito(pokemonAtual.nome);
   }
 }
 
@@ -133,10 +133,10 @@ function atualizarBotaoCoracao() {
 }
 
 // CREATE — salvar um favorito
-async function salvarFavorito(nome, extra) {
+async function salvarFavorito(nome) {
   const { data, error } = await supabase
     .from("favoritos")
-    .insert({ nome_item: nome, dados_extra: extra })
+    .insert({ nome_item: nome })
     .select()
     .single();
 
@@ -146,7 +146,7 @@ async function salvarFavorito(nome, extra) {
   }
 
   // atualiza a lista local direto, sem precisar buscar tudo de novo
-  favoritos.push(data);
+  favoritos.unshift(data);
   renderizarLista(favoritos);
   atualizarBotaoCoracao();
 }
@@ -156,7 +156,7 @@ async function listarFavoritos() {
   const { data, error } = await supabase
     .from("favoritos")
     .select("*")
-    .order("created_at");
+    .order("created_at", { ascending: false });
 
   if (error) {
     console.error("Erro ao listar favoritos:", error);
@@ -182,6 +182,24 @@ async function removerFavorito(id) {
   atualizarBotaoCoracao();
 }
 
+const spriteCache = {}; // guarda a sprite de cada nome já buscado, pra nao repetir fetch
+
+// busca a sprite de um pokemon pelo nome (usa cache se ja tiver)
+async function buscarSprite(nome) {
+  if (spriteCache[nome]) return spriteCache[nome];
+
+  try {
+    const resposta = await fetch(`https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(nome)}`);
+    if (!resposta.ok) return null;
+
+    const dados = await resposta.json();
+    spriteCache[nome] = dados.sprites.front_default;
+    return spriteCache[nome];
+  } catch {
+    return null;
+  }
+}
+
 // desenha a lista de favoritos na tela
 function renderizarLista(favoritos) {
   const lista = document.getElementById("lista-favoritos");
@@ -193,25 +211,27 @@ function renderizarLista(favoritos) {
   }
 
   favoritos.forEach((favorito) => {
-    const extra = favorito.dados_extra || {};
     const item = document.createElement("li");
     item.className = "item-favorito";
 
     item.innerHTML = `
-      ${
-        extra.imagem
-          ? `<img src="${extra.imagem}" alt="${favorito.nome_item}">`
-          : ""
-      }
+      <img class="sprite-favorito" alt="${favorito.nome_item}">
       <span class="nome-favorito">${favorito.nome_item}</span>
-      <button class="remover-favorito" type="button" aria-label="Remover ${favorito.nome_item}">✕</button>
+      <button class="coracao-btn coracao-lista ativo" type="button" aria-label="Remover ${favorito.nome_item} dos favoritos">
+        ${SVG_CORACAO}
+      </button>
     `;
 
     item
-      .querySelector(".remover-favorito")
+      .querySelector(".coracao-lista")
       .addEventListener("click", () => removerFavorito(favorito.id));
 
     lista.appendChild(item);
+
+    // a sprite carrega depois, sem travar o resto da lista
+    buscarSprite(favorito.nome_item).then((url) => {
+      if (url) item.querySelector(".sprite-favorito").src = url;
+    });
   });
 }
 

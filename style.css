@@ -287,6 +287,10 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  max-height: 290px;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 
 .favoritos-vazio {
@@ -297,16 +301,17 @@ h1 {
 .item-favorito {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 
-  padding: 8px 12px;
+  padding: 1px 12px;
   background: #f2f4f3;
   border-radius: 10px;
 }
 
-.item-favorito img {
-  width: 36px;
-  height: 36px;
+.item-favorito img.sprite-favorito {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
   image-rendering: pixelated;
 }
 
@@ -316,17 +321,15 @@ h1 {
   color: #1e2b25;
 }
 
-.remover-favorito {
-  border: none;
-  background: transparent;
-  color: #b04a4a;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 6px;
-  transition: background-color 0.15s ease;
+/* Coração dentro da lista de favoritos (mesmo visual do resultado, sem posição absoluta) */
+.coracao-btn.coracao-lista {
+  position: static;
+  transform: none;
+  flex-shrink: 0;
+  margin-right: 4px;
 }
 
-.remover-favorito:hover {
-  background: #f6dddd;
+/* ao passar o mouse, o coração "esvazia" indicando que vai remover */
+.coracao-btn.coracao-lista:hover svg {
+  fill: #fff;
 }

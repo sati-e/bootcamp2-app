@@ -1,0 +1,22 @@
+# Controle de versao
+.git
+.gitignore
+
+# Documentacao e evidencias
+README.md
+prints/
+
+# Arquivos do proprio Docker
+Dockerfile
+.dockerignore
+
+# Lixo de sistema e editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Dependencias/rascunhos, caso existam
+node_modules/
+*.log
+*.tmp
