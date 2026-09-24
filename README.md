@@ -31,3 +31,8 @@ Satie Kumeda Chirico 22301624
 ## Como executar localmente
 - **Aplicação no ar (GitHub Pages):** [https://sati-e.github.io/bootcamp2-app/](https://sati-e.github.io/bootcamp2-app/)
 - **Repositório:** https://github.com/sati-e/bootcamp2-app
+
+## Sidequests
+SQ1 · .dockerignore
+
+O arquivo .dockerignore exclui da imagem tudo o que não é necessário para rodar a aplicação: .git, README.md, /prints, Dockerfile, arquivos de editor e lixo de sistema. Isso deixa a imagem menor, porque esses arquivos não são copiados para dentro dela, e o build mais rápido, porque o Docker envia menos arquivos para o daemon. Também evita vazar informações desnecessárias (como o histórico do Git) dentro da imagem publicada.
