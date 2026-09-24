@@ -48,10 +48,10 @@ Tabela: favorito
 | created_at  | timestamptz  | Data/hora em que o favorito foi salvo  |
 | nome_item  | text  | Nome do Pokémon favoritado  |
 
-Operações implementadas:
-CREATE: salvarFavorito(nome) - insert na tabela ao clicar no coração de um Pokémon ainda não favoritado.
-READ: listarFavoritos() - select ordenado do mais recente para o mais antigo, executado ao abrir a página.
-DELETE: removerFavorito(id) - deleta ao clicar no coração.
+Operações implementadas:  
+CREATE: salvarFavorito(nome) - insert na tabela ao clicar no coração de um Pokémon ainda não favoritado.  
+READ: listarFavoritos() - select ordenado do mais recente para o mais antigo, executado ao abrir a página.  
+DELETE: removerFavorito(id) - deleta ao clicar no coração.  
 
 Limitação: as políticas de acesso (RLS) da tabela estão abertas para o papel "anon"
 
