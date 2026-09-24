@@ -56,6 +56,13 @@ DELETE: removerFavorito(id) - deleta ao clicar no coração.
 Limitação: as políticas de acesso (RLS) da tabela estão abertas para o papel "anon"
 
 ## Sidequests
-SQ1 .dockerignore
+### SQ1 .dockerignore
 
 O arquivo .dockerignore exclui da imagem tudo o que não é necessário para rodar a aplicação: .git, README.md, /prints, Dockerfile, arquivos de editor e lixo de sistema. Isso deixa a imagem menor, porque esses arquivos não são copiados para dentro dela, e o build mais rápido, porque o Docker envia menos arquivos para o daemon. Também evita vazar informações desnecessárias (como o histórico do Git) dentro da imagem publicada.
+
+### SQ2 Versionamento de imagem
+
+O repositório no Docker Hub tem as tags:  
+1.0 - primeira versão funcional, com busca e favoritos.  
+1.1 - melhoria: o botão do Pokémon pesquisado possui o mesmo efeito de preencher e esvaziar que a lista, e o ícone de pesquisar inverte as cores no hover.
+latest - aponta para a 1.1.  
