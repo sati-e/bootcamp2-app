@@ -234,3 +234,99 @@ h1 {
 #sugestoes li.ativo {
   background: #f2f4f3;
 }
+/* Coração de favoritar, fica colado na lateral direita do resultado */
+#resultado {
+  position: relative;
+}
+
+.coracao-btn {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+
+  border: none;
+  background: transparent;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.coracao-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+  stroke: #e0568c;
+  stroke-width: 1.5;
+  transition: fill 0.2s ease, transform 0.15s ease;
+}
+
+.coracao-btn:active svg {
+  transform: scale(0.9);
+}
+
+.coracao-btn.ativo svg {
+  fill: #e0568c;
+}
+
+/* Seção Meus favoritos */
+#favoritos {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+#favoritos h2 {
+  font-size: 18px;
+  color: #509977;
+  margin-bottom: 12px;
+}
+
+#lista-favoritos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.favoritos-vazio {
+  color: #8a938e;
+  font-size: 14px;
+}
+
+.item-favorito {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 12px;
+  background: #f2f4f3;
+  border-radius: 10px;
+}
+
+.item-favorito img {
+  width: 36px;
+  height: 36px;
+  image-rendering: pixelated;
+}
+
+.item-favorito .nome-favorito {
+  flex: 1;
+  text-transform: capitalize;
+  color: #1e2b25;
+}
+
+.remover-favorito {
+  border: none;
+  background: transparent;
+  color: #b04a4a;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+}
+
+.remover-favorito:hover {
+  background: #f6dddd;
+}
