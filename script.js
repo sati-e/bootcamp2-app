@@ -68,9 +68,12 @@ async function buscarDados(termo) {
       ${criarBotaoCoracao(favoritos.find((f) => f.nome_item === dados.name))}
     `;
 
-    document
-      .getElementById("botao-favoritar")
-      .addEventListener("click", () => alternarFavorito());
+    const botaoFavoritar = document.getElementById("botao-favoritar");
+    botaoFavoritar.addEventListener("click", () => alternarFavorito());
+    // depois que o mouse sai, volta a valer o efeito de hover
+    botaoFavoritar.addEventListener("mouseleave", () =>
+      botaoFavoritar.classList.remove("sem-hover")
+    );
 
   } catch (erro) {
     area.innerHTML = `
@@ -108,6 +111,9 @@ async function alternarFavorito() {
 
   const botao = document.getElementById("botao-favoritar");
   const idAtual = botao.dataset.id;
+
+  // mostra o estado real logo após o clique, sem o efeito de hover por cima
+  botao.classList.add("sem-hover");
 
   if (idAtual) {
     await removerFavorito(idAtual);

@@ -131,7 +131,7 @@ h1 {
   color: white;
 
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
 }
 
 #botao-buscar svg {
@@ -141,7 +141,10 @@ h1 {
 }
 
 #botao-buscar:hover {
-  background: #99ccb2;
+  /* cores invertidas: fundo branco, lupa verde e contorno verde */
+  background: white;
+  color: #509977;
+  box-shadow: inset 0 0 0 2px #509977;
 }
 
 #botao-buscar:active {
@@ -241,9 +244,8 @@ h1 {
 
 .coracao-btn {
   position: absolute;
-  top: 50%;
-  right: 8px;
-  transform: translateY(-50%);
+  bottom: 20px;
+  right: 31px;
 
   border: none;
   background: transparent;
@@ -266,6 +268,26 @@ h1 {
 
 .coracao-btn.ativo svg {
   fill: #e0568c;
+}
+
+/* Hover: coração vazio preenche, coração cheio esvazia */
+@media (hover: hover) {
+  .coracao-btn:hover svg {
+    fill: #e0568c;
+  }
+
+  .coracao-btn.ativo:hover svg {
+    fill: #fff;
+  }
+
+  /* logo depois de clicar, mantém o estado real até o mouse sair */
+  .coracao-btn.sem-hover:hover svg {
+    fill: #fff;
+  }
+
+  .coracao-btn.ativo.sem-hover:hover svg {
+    fill: #e0568c;
+  }
 }
 
 /* Seção Meus favoritos */
@@ -324,12 +346,6 @@ h1 {
 /* Coração dentro da lista de favoritos (mesmo visual do resultado, sem posição absoluta) */
 .coracao-btn.coracao-lista {
   position: static;
-  transform: none;
   flex-shrink: 0;
   margin-right: 4px;
-}
-
-/* ao passar o mouse, o coração "esvazia" indicando que vai remover */
-.coracao-btn.coracao-lista:hover svg {
-  fill: #fff;
 }
