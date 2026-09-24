@@ -21,7 +21,10 @@ Satie Kumeda Chirico 22301624
 - Ver sugestões de nomes em tempo real enquanto digita, com até 5 opções
 - Clicar em uma sugestão para preenchê-la automaticamente e já disparar a busca
 - Visualizar imagem, altura, peso e tipo(s) do Pokémon encontrado
-- Receber uma mensagem de erro amigável caso o nome/número não corresponda a nenhum Pokémon
+- Receber uma mensagem de erro caso o nome/número não corresponda a nenhum Pokémon
+- Favoritar um Pokémon clicando no coração ao lado do resultado (clicar de novo remove)
+- Ver a seção "Meus favoritos", carregada automaticamente ao abrir a página, com a sprite de cada Pokémon salvo
+- Remover um favorito clicando no coração preenchido dentro da lista
 
 ## Tecnologias utilizadas
 - HTML5
