@@ -13,8 +13,8 @@ Satie Kumeda Chirico 22301624
 - **Nome:** [PokeAPI](https://pokeapi.co/)
 - **Documentação:** https://pokeapi.co/docs/v2
 - **Endpoints consumidos:**
-  - `GET /pokemon/{name or id}` — retorna os dados do Pokémon buscado (nome, altura, peso, tipos, sprites)
-  - `GET /pokemon?limit=100000` — retorna a lista completa de nomes de Pokémon, usada para gerar as sugestões de autocomplete
+  - `GET /pokemon/{name or id}` - retorna os dados do Pokémon buscado (nome, altura, peso, tipos, sprites)
+  - `GET /pokemon?limit=100000` - retorna a lista completa de nomes de Pokémon, usada para gerar as sugestões de autocomplete
 
 ## Funcionalidades
 - Buscar um Pokémon digitando o nome (ex: `pikachu`) ou o número da Pokédex (ex: `25`)
