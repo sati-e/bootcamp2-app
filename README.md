@@ -66,3 +66,30 @@ O repositório no Docker Hub tem as tags:
 1.0 - primeira versão funcional, com busca e favoritos.  
 1.1 - melhoria: o botão do Pokémon pesquisado possui o mesmo efeito de preencher e esvaziar que a lista, e o ícone de pesquisar inverte as cores no hover.
 latest - aponta para a 1.1.  
+
+### SQ3 Explorando a orquestração
+
+O overview do repositório no Docker Hub contém o que é a aplicação, o comando `docker run` e o link do GitHub.  
+Texto usado:
+
+```markdown
+# Pokédex - Bootcamp PokeAPI
+
+Pokédex web que busca Pokémon na PokeAPI (por nome ou número), com autocomplete,
+e permite salvar favoritos em um banco Supabase. Servida por Nginx.
+
+## Como rodar
+docker run -d -p 8080:80 satiekc/bootcamp2-app:1.1
+
+Depois abra http://localhost:8080
+
+## Código-fonte
+https://github.com/sati-e/Bootcamp-II-Etapa-01-Desafio-individual
+```
+
+### SQ4 Explorando a orquestração
+
+Dois containers da aplicação rodando ao mesmo tempo, nas portas 8080 e 8081 com print do `docker ps` em /prints
+
+**Se tivesse 100 containers, como gerenciaria?**  
+Subir e acompanhar 100 containers manualmente, com docker run e docker ps, seria inviável. E para resolver isso existe o Kubernetes, um orquestrador de containers  que organiza as máquinas em um cluster. A menor unidade que ele gerencia é o pod, que agrupa um ou mais containers que compartilham rede e armazenamento. Em vez de criar pods um a um, é declarado o estado desejado, por exemplo "quero 100 réplicas da aplicação", e o Kubernetes distribui os pods pelos nós, monitora, recria automaticamente os que falham, permite aumentar ou diminuir o número de réplicas e faz atualizações graduais da versão 1.0 para a 1.1. Ele também distribui o tráfego entre as réplicas por meio de serviços, de modo que quem acessa a aplicação não precisa saber em qual container ela está rodando.
