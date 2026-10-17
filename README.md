@@ -9,6 +9,11 @@ Satie Kumeda Chirico 22301624
 - Autocomplete/sugestões enquanto o usuário digita, facilitando encontrar o nome certo
 - Exibe dados essenciais: imagem (sprite), altura, peso e tipo(s) do Pokémon
 
+## Links
+- **Repositório:** https://github.com/sati-e/bootcamp2-app
+- - **GitHub Pages:** [https://github.com/sati-e/bootcamp2-app](https://sati-e.github.io/bootcamp2-app/)
+- **Docker Hub:** https://hub.docker.com/r/satiekc/bootcamp2-app
+
 ## API utilizada
 - **Nome:** [PokeAPI](https://pokeapi.co/)
 - **Documentação:** https://pokeapi.co/docs/v2
