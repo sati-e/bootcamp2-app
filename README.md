@@ -11,7 +11,7 @@ Satie Kumeda Chirico 22301624
 
 ## Links
 - **Repositório:** https://github.com/sati-e/bootcamp2-app
-- - **GitHub Pages:** [https://github.com/sati-e/bootcamp2-app](https://sati-e.github.io/bootcamp2-app/)
+- **GitHub Pages:** [https://github.com/sati-e/bootcamp2-app](https://sati-e.github.io/bootcamp2-app/)
 - **Docker Hub:** https://hub.docker.com/r/satiekc/bootcamp2-app
 
 ## API utilizada
